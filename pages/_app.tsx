@@ -10,9 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className='	sb_center'>
       <Analytics />
       <Head>
-        <title>Sunny Jayaram</title>
-        <meta name="description" content="Sunny Jayaram's Webside " />
-        <link rel="icon" href="IMG_8285 2-modified (1).png" />
+        <title>Inventory Eye</title>
+        {/* <meta name="description" content="Sunny Jayaram's Webside " />
+        <link rel="icon" href="IMG_8285 2-modified (1).png" /> */}
       </Head>
       <Navbar />
       <Component {...pageProps} />
