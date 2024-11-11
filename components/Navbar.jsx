@@ -6,7 +6,7 @@ const Navbar = () => {
     const [nav, setNav] = useState(false);
     const [cur, setCur] = useState("Home");
     const [color, setColor] = useState("transparent");
-    const [textColor, setTextColor] = useState("white");
+    const [textColor, setTextColor] = useState("#090909");
 
     const handleNav = () => {
         setNav(!nav);
@@ -16,10 +16,10 @@ const Navbar = () => {
       const changeColor = () => {
         if (window.scrollY >= 90) {
           setColor('#000000');
-          setTextColor('#ffffff');
+          setTextColor('#FFFFFF');
         } else {
           setColor('transparent');
-          setTextColor('#ffffff');
+          setTextColor('#090909');
         }
       };
       window.addEventListener('scroll', changeColor);

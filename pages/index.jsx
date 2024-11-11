@@ -1,5 +1,7 @@
+// index.jsx
 import React, { useState, useEffect } from "react";
 import WebCam from '../components/WebCam';
+import DynamicBarGraph from '../components/graph';
 
 async function callGPT4API(image) {
   try {
@@ -25,14 +27,14 @@ export default function Home() {
 
   useEffect(() => {
     const fetchAnalysis = async () => {
+      // return
       if (image) {
         setAnalysis("Pending");
         var analysisResult = await callGPT4API(image);
 
-        // it looks lie: ```json { "sunglasses": 1, "pen": 1 } ```
+        // it looks like: ```json { "sunglasses": 1, "pen": 1 } ```
         // remove the backticks and the json keyword and parse the string to an object
         analysisResult = JSON.parse(analysisResult.replace('json', '').replace(/`/g, ''));
-
 
         setAnalysis(analysisResult);
       }
@@ -42,17 +44,23 @@ export default function Home() {
   }, [image]);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center">
-      <WebCam setImage={setImage} />
-      <p className="z-20 pt-4 text-center">Hello</p>
+    <div className="flex flex-col items-center justify-center min-h-screen py-4 bg-gray-100">
+      <div className="pt-10 flex w-full  flex-row items-center justify-evenly">
+        <WebCam setImage={setImage} />
 
-      {/* Display the captured image below the live webcam feed */}
-      {image && (
-        <div className="mt-4">
-          <h3>Captured Image:</h3>
-          <img src={image} alt="Captured" style={{ width: '200px', height: 'auto' }} />
-          <p>Analysis: {JSON.stringify  (analysis)}</p>
-        </div>
+        {image && (
+          <div className="mt-8 flex flex-col items-center">
+            <h3 className="text-xl font-semibold mb-4">Captured Image:</h3>
+            <img src={image} alt="Captured" className="w-64 h-auto rounded-lg shadow-md" />
+            {/* <p className="mt-4 text-center text-lg">Analysis: {JSON.stringify(analysis)}</p> */}
+          </div>
+        )}
+      </div>
+      {analysis && analysis == "Pending" && (
+        <div className="mt-8 text-2xl font-semibold text-center">Analyzing...</div>
+      )}
+      {analysis&& (
+        <DynamicBarGraph data={analysis} setData={setAnalysis} />
       )}
     </div>
   );

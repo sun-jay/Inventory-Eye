@@ -24,7 +24,7 @@ async function callGPT4API(image) {
             },
             {
               type: "text",
-              text: 'Return ONLY A JSON of the objects on the table or shelf like {"apple": 3, "banana": 5}',
+              text: 'Return ONLY A JSON of the objects on the table or shelf like {"apple": 3, "banana": 5}. You can group items that are pretty much the same in the same key',
             },
           ],
         },
